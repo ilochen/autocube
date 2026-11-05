@@ -1,0 +1,10 @@
+rtl/Top.sv
+rtl/Algorithm.sv
+rtl/State_Determination.sv
+rtl/motor.sv
+rtl/real_Driver_Decoder.sv
+rtl/Driver_Clock_Gen.sv
+rtl/I2C_sensor.sv
+rtl/I2C_Setup.sv
+rtl/I2C_Read.sv
+rtl/State_Preparer.sv
