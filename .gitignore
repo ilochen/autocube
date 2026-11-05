@@ -1,0 +1,5 @@
+build/
+obj_dir/
+*.fsdb
+*.vcd
+.DS_Store
