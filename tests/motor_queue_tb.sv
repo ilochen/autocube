@@ -1,5 +1,5 @@
 module motor_queue_tb;
-  bit clk, rst_n, motor_start, driver_done;
+  bit clk, rst_n, motor_start, driver_done, observed;
   logic [3:0] moves[0:31], queue[0:255];
   logic done;
   always #5 clk = ~clk;
@@ -21,10 +21,10 @@ module motor_queue_tb;
         if (queue[0] !== 4'b0010 || queue[1] !== 4'b1011 || queue[2] !== 0)
           $fatal(1,"Unexpected motor words %h %h %h",queue[0],queue[1],queue[2]);
         $display("PASS: front turns select motors 2 and 3; view change emits no motor word");
-        $finish;
-        disable run;
+        observed = 1;
       end
     end
-    $fatal(1,"No motor_done");
+    if (!observed) $fatal(1,"No motor_done");
+    $finish;
   end
 endmodule
