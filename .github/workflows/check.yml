@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y verilator
-      - run: make lint
-      - run: make test
+      - name: Elaborate system and check the motor queue with Verilator 5.052
+        run: |
+          docker run --rm --entrypoint /bin/sh \
+            -v "$GITHUB_WORKSPACE:/src" -w /src \
+            verilator/verilator@sha256:a5b73e2fce0b2c483396f3800940f33b6faa802331a061c21694dd27b7352120 \
+            -c 'verilator --version && make lint && make test'

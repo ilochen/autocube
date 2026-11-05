@@ -27,3 +27,5 @@ Top.sv supplies a predefined starting sticker vector and declares 12 MHz, 2 kHz,
 ## Elaborate the system
 
 Run `make lint` from the repository root. The source list `rtl/top.f` selects the integrated Top.sv and real_Driver_Decoder.sv variants and both I²C engines. Verilator 5.052 elaborates this list. The supplied Top leaves the `i_dd_done` input open on Algorithm and motor, which matters when interpreting the random-wait and queue-clear transitions. Check those connections when selecting a hardware variant. Elaborating the hierarchy and running the motor unit test are separate from reproducing the physical board run.
+
+CI uses the official Verilator 5.052 image pinned by digest. Older distributions can reject the sequential tri-state assignments in the original I²C modules even though the motor unit compiles.
