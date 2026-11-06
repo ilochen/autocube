@@ -39,3 +39,9 @@ The selected top-level hierarchy elaborates, and the motor-queue unit test passe
 Rechecked on 6 November 2026. Simulation results establish the covered functional behavior; physical implementation measurements are identified separately in the documentation.
 
 [Board integration and missing original artifacts](docs/board-integration.md)
+
+## External clock-generation dependency
+
+The board wrapper expects a Quartus Platform Designer/Qsys module named `Altpll`. Its generated IP and configuration are external to this source release. The wrapper connects a 50 MHz board clock to this module and consumes 12 MHz, 100 kHz and 2 kHz outputs. Provide a compatible clock-generation implementation before building the board design; frequency division may be required in addition to a PLL.
+
+The portable `make lint` and `make test` targets do not instantiate the board wrapper and do not require this IP. See the [clock interface and board integration guide](docs/board-integration.md) for the required ports and remaining hardware integration steps.
