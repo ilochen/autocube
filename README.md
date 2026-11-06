@@ -1,5 +1,7 @@
 # Autocube
 
+[![Validation](https://github.com/ilochen/autocube/actions/workflows/check.yml/badge.svg)](https://github.com/ilochen/autocube/actions/workflows/check.yml)
+
 DE2-115 FPGA Rubik’s Cube solver from the NTU Digital Circuit Lab project.
 
 [Watch the team’s hardware demonstration](https://youtu.be/S8VXiabIi5Q) · [Interactive project page](https://ilochen.github.io/projects/autocube/)
@@ -29,3 +31,11 @@ Top.sv supplies a predefined starting sticker vector and declares 12 MHz, 2 kHz,
 Run `make lint` from the repository root. The source list `rtl/top.f` selects the integrated Top.sv and real_Driver_Decoder.sv variants and both I²C engines. Verilator 5.052 elaborates this list. The supplied Top leaves the `i_dd_done` input open on Algorithm and motor, which matters when interpreting the random-wait and queue-clear transitions. Check those connections when selecting a hardware variant. Elaborating the hierarchy and running the motor unit test are separate from reproducing the physical board run.
 
 CI uses the official Verilator 5.052 image pinned by digest. Older distributions can reject the sequential tri-state assignments in the original I²C modules even though the motor unit compiles.
+
+## Validation snapshot
+
+The selected top-level hierarchy elaborates, and the motor-queue unit test passes. A complete board rebuild remains dependent on the missing clock-IP project and board integration items listed below.
+
+Rechecked on 6 November 2026. Simulation results establish the covered functional behavior; physical implementation measurements are identified separately in the documentation.
+
+[Board integration and missing original artifacts](docs/board-integration.md)
